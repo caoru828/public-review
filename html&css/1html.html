@@ -11,8 +11,19 @@
         .bb{
             background: yellow;
         }
+        #div1{
+            height: 400px;
+            /*url()里加双引不加双引一样 */
+            background: url(img/2.jpg) no-repeat;
+            /*background: url("img/2.jpg");*/
+        }
 
-
+        .a .b .c .d .e .f .g .h .i .j .k{
+            background: #ff0000;
+        }
+        #divi{
+            background: #00ff00;
+        }
     </style>
 </head>
 <body>
@@ -24,5 +35,33 @@
 
 <div class="aa bb">aaa</div>
 <div class="bb aa">aaa</div>
+
+<div id="div1"></div>
+
+<!-- 一堆class没有一个id好使 星河99次求婚抵不过余淮的一句好久不见-->
+<div id="div2">
+    <div class="a">
+        <div class="b">
+            <div class="c">
+                <div class="d">
+                    <div class="e">
+                        <div class="f">
+                            <div class="g">
+                                <div class="h">
+                                    <div class="i">
+                                        <div class="j">
+                                            <div class="k" id="divi">divdiv</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

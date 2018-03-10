@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <!-- js1 alert("11")-->
+ <!-- js2 有一个div-->
+ <!-- 会一直转，弹出11同时图标一直转  只有按确定才出div
+ js单线程。alert阻塞加载
+ 浏览器是多线程，同一时间可以执行多个任务
+
+ -->
+
+ <!--异步加载 defer 和 async区别-->
+ <!--defer 会一直转，弹出11同时图标一直转  只有按确定才出div-->
+ <!--async 会一直转，同时出现div-->
+
+ <!-- 正常js按文件加载顺序执行 ，解析 加载执行 解析-->
+ <!-- defer 边解析边加载 可以保证加载顺序 解析 解析加载 解析完 再执行-->
+ <!-- async 边解析边加载 不可以保证加载顺序 解析 解析加载完立马执行 再解析 文件大的后执行，小的先执行完-->
+
+<script src="js1.js" defer></script>
+<script src="js1.js" async></script>
+<script src="js2.js"></script>
+<script src="js3.js"></script>
+</body>
+</html>

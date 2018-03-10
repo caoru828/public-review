@@ -35,6 +35,7 @@ $("select").attr("selected","selected");
 •.prop( propertyName, value ) •.prop( propertyName, value )
 •.prop( properties )
 •.prop( propertyName, function(index, oldPropertyValue) )
+
 看出区别了吗，没错，是参数有区别，attr()传入的是attributeName，
 而prop()传入的是propertyName,现在我们的问题转移了，我们需要研究的是attributeName和propertyName之间的区别了。
 Attributes vs. Properties

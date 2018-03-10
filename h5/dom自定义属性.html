@@ -6,6 +6,20 @@
 </head>
 <body>
 
+<!-- h5 自定义数据-->
+
+<!--在自定义属性中建议用data-aa开头，因为在jq中有data方法取出对应属性
+<div id="div2" data-aa="456"></div>
+$("#div1").data("aa"); // 这个值就是456
+jq的data方法解析当前是否有data-这个属性解析出对应的值
+
+<div id="div2" data-aa-bb="456"></div>
+$("#div1").data("aa-bb");     $("#div1").data("aaBb");都可以取到对应的值
+
+对象.dataset 取到data后边所有的数据集合 返回一个对象 domstringmap{“”：“”}键值对
+只支持首字母大写 oDiv1.dataset.aaBb;-的形式不好使报错
+
+-->
     <div id="div2"></div>
 
     <script>
@@ -26,5 +40,7 @@
 //  selected特性（attribute）值不会因为复选框的状态而改变，而selected属性（property）会因为复选框的状态而改变。
 //  因此，跨浏览器兼容的检索和更改DOM属性,比如元素的checked, selected, 或 disabled状态，请使用.prop()方法。
     </script>
+
+
 </body>
 </html>

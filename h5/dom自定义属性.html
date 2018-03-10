@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="div2"></div>
+
+    <script>
+        var oDiv1 = document.getElementById("div2");
+        oDiv1.aa = "gegr"; // 这个方式只是为了存值，在dom结构中看不到的
+
+//      jq的  prop和attr与原生对应
+//      对象.属性1对应prop ， 在dom结构中看不到
+//      而对象.setAttribute()对应attr 设置属性，取属性用getAttribute 在dom结构中能看到
+//      在设置checked, selected, 或 disabled状态 属性的时候需要用prop，详情看attr与prop
+
+//        现在，我们一目了然了，attribute是一个特性节点，每个DOM元素都有一个对应的attributes属性来存放所有的attribute节点，
+//        它是一个类数组的容器。attributes的每个数字索引以名值对(name=”value”)的形式存放了一个attribute节点。
+//而property就是一个属性，是一个以名值对(name=”value”)的形式存放在Object中的属性。
+//回到一开始的问题，根据W3C的表单规范 ，在selected属性（property）是一个布尔属性，
+// 这意味着,如果这个特性（attribute）存在， 即使该特性没有对应的值，
+// 或者被设置为空字符串值，或甚至是"false"，相应的属性（property）都还是为true。
+//  selected特性（attribute）值不会因为复选框的状态而改变，而selected属性（property）会因为复选框的状态而改变。
+//  因此，跨浏览器兼容的检索和更改DOM属性,比如元素的checked, selected, 或 disabled状态，请使用.prop()方法。
+    </script>
+</body>
+</html>

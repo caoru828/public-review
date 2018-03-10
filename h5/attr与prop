@@ -42,6 +42,7 @@ Attributes vs. Properties
 在这里，我们可以将attribute理解为“特性”，property理解为为“属性”从而来区分俩者的差异。
 如果把DOM元素看成是一个普通的Object对象，这个对象在其定义时就具有一些属性（property），比如把select的option当做一个对象：
 
+
 var option = {
 selected:false，
 disabled:false，

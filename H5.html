@@ -17,16 +17,26 @@
         <input type="password">
     </label>
 
-    <!--提交到后端name = -->
+    <!--分组  提交到后端name = -->
     <select name="" id="">
         <option value="">1</option>
         <option value="">2</option>
         <option value="">3</option>
     </select>
 
-    <!--name值分成一组，后端提交用name-->
+
+    <!--单选  name值分成一组，后端提交用name-->
     <input type="radio" name="sex">man
     <input type="radio" name="sex">woman
+
+    <!--多选 -->
+    <input type="checkbox" name="hoby">
+    <input type="checkbox" name="hoby">
+    <input type="checkbox" name="hoby">
+
+    <!--提交，统一value赋值，解决浏览器兼容性问题-->
+    <input type="submit" value="注册">
+    <input type="reset" value="重置">
 </form>
 
 

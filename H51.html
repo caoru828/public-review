@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--h5新特性之  1.的form表单-->
+
+<!--action = 提交后端的地址-->
+<form action="">
+    <label for="username">用户名：</label>
+    <input type="text" id="username" autocomplete="off" autofocus placeholder="请输入">
+
+    <!--h5表单属性-->
+
+    <!--这个id不写不提示，写了才提示，这个表单有id提交，
+    同一个名字时会存在本地，下次输入会有提示 关掉提示 autocomplete="off" -->
+
+    <!--点击界面自动获取输入框 属性 autofocus-->
+
+    <!--placeholder="请输入   h5属性有兼容性问题-->
+
+    <label>用户名： <input type="text"> </label>
+
+    <label for="">
+        pwd:
+        <input type="password">
+    </label>
+
+    <!--分组  提交到后端name = -->
+    <select name="" id="">
+        <option value="">1</option>
+        <option value="">2</option>
+        <option value="">3</option>
+    </select>
+
+
+    <!--单选  name值分成一组，后端提交用name-->
+    <input type="radio" name="sex">man
+    <input type="radio" name="sex">woman
+
+    <!--多选 -->
+    <input type="checkbox" name="hoby">
+    <input type="checkbox" name="hoby">
+    <input type="checkbox" name="hoby">
+
+    <!--提交，统一value赋值，解决浏览器兼容性问题-->
+    <input type="submit" value="注册">
+    <!--submit在里边会提交所有form表单里的东西-->
+
+    <!--要是放在form表单之外，提交某个表单需要加个属性是form="该form表单的id"-->
+    <!--<input type="text" form="form的id">-->
+
+    <input type="reset" value="重置">
+
+    <!--h5新特性：-->
+    <!--1.表单-->
+
+    <!--很多兼容性问题，chrom和Firefox提示的不一样-->
+    <input type="email">
+    <input type="url">
+    <input type="number">
+    <input type="range">
+    <br>
+    <!--这个Firefox不支持-->
+    日期：
+    <input type="date">
+    <input type="datetime">
+
+    <!--引入日期插件 datepicker-->
+
+    <!--多个小X-->
+    <input type="search">
+
+    <input type="color">
+
+
+
+
+</form>
+
+<!--   2.音频视频-->
+<div>
+<!-- 属性  loop循环 autoplay自动播放  controls可控制大小声进度 ogg mpeg4(标准MP4文件) webm-->
+<!--  视频-->
+<video src=" 视频地址" autoplay width="100px" height="200px" controls></video>
+
+<!-- 音频 ogg mp3 wav-->
+<audio src="mp3地址" autoplay controls></audio>
+</div>
+
+<!--3.选择器-->
+<script>
+
+//    无兼容性问题
+    document.getElementById("id")
+    document.getElementsByTagName("div")
+
+//    有兼容性问题
+    document.getElementsByName("username")
+    document.getElementsByClassName("ff")
+    document.querySelector("#div1")
+//  可以类似$的选择器
+    document.querySelector("#div1 .aa")
+    document.querySelectorAll("#div1 .aa")
+
+    console.log(odiv.className)  // string
+    odiv.className += aa
+    console.log(odiv.classList.add("bb")); //object
+//    返回数组
+    odiv1.classList.remove("bb")
+
+//    没有变成有，有变成没有  切换
+    odiv1.classList.toggle("bb")
+//    classList的方法
+//    length class长度 .add()添加class方法 .remove()删除class方法 toggle（） 切换class方法
+
+
+
+
+/**
+ * 查找符合className的元素
+ * @param className
+ * @param context
+ * @return {Array}
+ */
+function getByClass(className, context) {
+    context = context || document;
+    var result = [];
+    var arr = context.getElementsByTagName('*');
+    var re = new RegExp("\\b"+className+"\\b");
+    for(var i=0; i<arr.length; i++){
+        if(re.test(arr[i].className)){
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+
+</script>
+
+<!--4.json ： json （前台后台传数据用的）是一种数据交换格式
+      JavaScript object notation js的对象标记-->
+
+<!--  json格式的两种方法 json.stringify json.parse 这两个都有兼容性问题-->
+
+<!--   解决json的兼容性问题 ，
+   json.org  下载里的json2.js-->
+
+<!--类似于json的传值方式 xml json传值间区别
+xml
+优：虽然能很清晰的看到数据结构
+缺：数传输据量多 传输慢
+<user>zhangsan</user>
+<age>15</age>
+<school>linda1</school>
+
+json传输的数据小，更快一些
+
+-->
+<script>
+    var obj1 = {
+        name: "张三",
+        age :18
+    };
+//    将对象转化成字符串json.stringify  传给后台
+    var str1 = JSON.stringify(obj1); // obj => str
+    console.log(str1);
+//   str1就是一个json格式，用字符串表示当前对象
+//   输出结果   {"name":"张三","age":18}
+    document.write(str1);
+    var obj2 = JSON.parse(str1); // str => obj
+    console.log(obj2)
+
+    var obj = {
+        name:"坐在我旁边的二货",
+        age :88,
+        skill:{
+            eat : "便便",
+            say : "自己很牛逼",
+            rrr:{
+                11:55
+            }
+        }
+    };
+    console.log(obj);
+//    深拷贝防止原来的堆内存的对象被改变
+    function clone(obj){
+        var  newObj = {};
+        for(var p in obj){
+           if(typeof  obj[p]===object){
+              newObj[p] = arguments.callee(obj[p]);//递归
+           }
+           newObj[p] = obj[p];
+        }
+        return newObj;
+    }
+    console.log(clone(obj));
+
+//  完成深拷贝的两种方法
+//    1.封装函数
+    function cloneObj(obj) {
+        var newObj = {};
+        for(var p in obj){
+            if(typeof obj[p] === 'object'){
+                newObj[p] = arguments.callee(obj[p]);
+            }else{
+                newObj[p] = obj[p];
+            }
+        }
+        return newObj;
+    }
+//    2.json格式的转化
+    var str3 = JSON.stringify(obj);
+    var obj3 JSON.parse(str3);
+    console.log(obj3);
+
+
+</script>
+
+<!--解析字符串的方法 json eval区别
+1.eval("while(true){alert(1);}");//死循环了，不安全
+优点：可以解析任意字符串，任意js代码 ，       缺： 不安全
+2.JSON.parse("alert(2)")
+缺点：只能解析符合json格式的字符串          优点：安全
+
+注：要是后台传过来的json有错误，查json文件哪里出错，在线json格式校验
+能看出哪行错
+-->
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">随机</button>
+<div id="res"></div>
+
+ <!--location.hash重定向 location。href 取到当前地址-->
+<!-- 点击按钮随机生成5个数，按浏览器前后按钮可回去-->
+<script>
+    var oBtn = document.getElementById("btn");
+    var oRes = document.getElementById("res");
+    var res = [];
+    oBtn.addEventListener("click",function () {
+        res = [];
+        for(var i=0;i<5;i++){
+            res.push(Math.floor(Math.random()*10));
+        }
+        oRes.innerHTML = res;
+        location.hash = "555";//让url地址改 变
+    })
+    window.onhashchange = function () {
+
+    }
+
+</script>
+</body>
+</html>

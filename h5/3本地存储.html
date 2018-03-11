@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+//    locationStorage 设置值 获取值 删除值的方法
+    locationStorage.username = "lisi";
+    localStorage.setItem("age",88);
+
+    console.log(locationStorage.username);
+    console.log(localStorage.getItem("age"));
+
+    locationStorage.removeItem("age");
+    locationStorage.clear(); //清除全部
+
+//    sessionStorage和locationStorage方法一样
+//    sessionStorage.name = "zhangsan";
+//    sessionStorage.setItem("age",88);
+
+//    cookie sessionStorage locationStorage 区别
+//    1.生命周期来看
+//    locationStorage一直有，除非手动删除 sessionStorage关闭浏览器就没有了 cookie可以设置生命周期，在生命周期内有效
+//    2.从数据角度
+//    locationStorage和sessionStorage不会自动把数据发送给服务端，尽在本地存储 cookie始终在同源http请求中携带，不管是否需要
+//    3.存储大小
+//    cookie存储数据不能超过4k，而locationStorage和sessionStorage存储信息5M或者更大
+//    4.作用域
+//    sessionStorage数据不共享 locationStorage和cookie数据共享
+
+//    session 会话 保存在服务端  eg 在登陆的时候，用户名等信息存在session里，在过期之前或浏览器查掉之前或用户退出之前在任何界面内都能取到session里放的值
+
+</script>
+
+
+</body>
+</html>

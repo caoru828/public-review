@@ -48,11 +48,17 @@ http://192.168.100     https://192.168.100     //协议不一样
 <!--
 解决跨域问题
 1.jsonp：json padding(json跨域方式，jsonp是一种格式)
-通过script的src加载另一个域的一个文件，通过src这个url用get方式把这个值从一个域传到另外一个域
+通过script的src加载另一个域的一个文件，通过src这个url用get方式把这个值从一个域传到另外一个域，
+get传参数的时候传一个方法的名字，通过方法名字，在另一个域里边把需要穿的数据再传回给原来这个域
+
+json是传输的格式，而jsonp是传输的方式
+
 script标签不会判断你引入的设么文件，只要js能执行就行
 
 js的function aa（可以传json格式的对象）  // 属性比较多的时候
 后边调用前端的函数的时候，前端可以在通过jsonp的src、get传函数名的时候将函数明写成callback=函数名
+
+在网页里边所有带src属性的都支持跨域
 
 实现：利用script标签的src属性，支持跨域，通过后台接口返回一个回调函数的调用，
 函数是声明在我们页面的回调函数
@@ -66,7 +72,7 @@ b域
     $function = $_GET["function"];
     <!--echo "$function('$username')";-->
 <!--将这个函数值传给a域-->
-    <!--echo "$callback('$username')";-->
+<!--echo "$callback('$username')";-->
 ?>
 
 

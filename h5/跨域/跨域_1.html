@@ -64,6 +64,9 @@ js的function aa（可以传json格式的对象）  // 属性比较多的时候
 函数是声明在我们页面的回调函数
 也可以动态生成script标签
 
+function bb(data){
+        alert(data.age+" haha");
+}
 <script src="http://www.b.com/test.php?name=zhangsan&age = 18&callback=fn"></script>
 b域
 <?php
@@ -90,16 +93,19 @@ echo "<script>top.bb("dff") </script>"
 -->
 
 <!--
-不推荐使用iframe，因为缺点1.使dom结构变的复杂2.搜索引擎抓取不到iframe的内容
+不推荐使用iframe(嵌入html)，因为缺点1.使dom结构变的复杂2.搜索引擎抓取不到iframe的内容
 
-3.利用后端实现：（不通过前端在本域下直接通过后端发送数据请求，后台在传给b域的后台，（后端服务器没有跨域问题）
+3.利用实现服务器代理（后端向后端传不存在跨域）：（不通过前端在本域下直接通过后端发送数据请求，后台在传给b域的后台，（后端服务器没有跨域问题）
   计算完后返回我们的后台，再通过后台传给前台  ，  a前--》a后--》b后（算）--》a后--》a前 ）
 
-4.服务器代理方式：在后台最前面加个请求头，允许跨域的请求头：header("Access-Control-Allow-Origin:http://www.a.com");
+4.后端配置，加允许跨域的请求头：在后台最前面加个请求头，允许跨域的请求头：header("Access-Control-Allow-Origin:http://www.a.com");
 
 同源策略：只允许相同域下访问数据；
 
 4.postmessage（h5）//兼容
+h5提供的新方式
+
+
 5.window.name///?///
 6.CORS跨域（IE10）
 		它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。

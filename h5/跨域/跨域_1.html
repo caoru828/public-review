@@ -104,6 +104,19 @@ echo "<script>top.bb("dff") </script>"
 
 4.postmessage（h5）//兼容
 h5提供的新方式
+a域
+<iframe id="iframe" src="http://www.b.com/index2.html" frameborder="0"></iframe>
+<script>
+    window.onload = function(){
+        var oIfream = document.getElementById("iframe");
+        var win = oIfream.contentWindow;
+        win.postMessage("hello", "http://www.b.com");
+    };
+</script>
+b域
+  window.onmessage = function(e){
+        alert(e.data);
+    };
 
 
 5.window.name///?///

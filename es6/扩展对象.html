@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+//    <!--扩展对象-->
+    function foo(...arg){
+        console.log(arg)
+    }
+    let obj1 = {
+      name:'zhandan',
+      age : 18
+    };
+    let obj2 = {
+        name:'ll',
+        age :20
+    };
+//    foo(obj1,obj2);
+
+     let obj3 = {...obj1,obj2}
+    console.log(obj3)
+
+
+
+//    扩展数组
+    let arr1 = [1,2];
+    let arr2 = [4,8];
+    let arr3 = [...arr1,...arr2]
+    let arr4 = [...arr1,arr2]
+    let arr5 = [arr1,...arr2]
+    console.log(arr3);
+    console.log(arr4);
+    console.log(arr5);
+
+
+</script>
+</body>
+</html>

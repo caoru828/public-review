@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="change">change</button>
+        <button @click="destroy">销毁</button>
+        {{msg}}
+    </div>
+    <script src="vue.js"></script>
+    <script>
+
+//        不是手动调用，是vue到那哥时候自动调用，methods里边的方法时我们自己调用的
+
+//        生命周期使用场景 ： 加载页面的时候，有个加载的gif转的那个，
+//        在beforeCreate放在一个地方，在created的时候remove掉
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 1,
+                timer: null
+            },
+            methods: {
+                change(){
+                    this.msg++; //改变的时候就会触发beforeUpdate（更新前） update（数据更新后）
+                },
+                destroy(){
+                    vm.$destroy();
+                }
+            },
+            beforeCreate(){
+                console.log('beforeCreate');
+            },
+            created(){  //实例创建之后
+                // create---mounted 之间 虚拟dom比较，把改变的同步到真实dom
+                console.log('created');
+            },
+            beforeMount(){
+                console.log('beforeMount');
+            },
+            mounted(){//可以获取到真实的dom了  操作dom的时候在这里  eg：滚动加载数据时，获取滚动条高度的情况下
+//                window.onscroll = function(){ document.body.scrollTop}
+                console.log('mounted');
+                this.timer = setInterval(()=>{  //定时器一般放在mounted里，这样要是想操作dom方便
+                    console.log('timer');
+                    this.msg++;
+                }, 1000);
+            },
+            beforeUpdate(){
+                console.log('beforeUpdate');
+            },
+            updated(){
+                console.log('updated');
+            },
+            beforeDestroy(){   //销毁实例，清理跟实例建立的连接，解绑全部指令及监听事件
+                console.log('beforeDestroy');
+                clearInterval(this.timer);
+            },
+            destroyed(){
+                console.log('destroyed');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -24,7 +24,11 @@ Vue.component('my-component', { /* ... */ })
 var MyComponent = Vue.component('my-component')
 -->
 
-
+<!--
+props传值
+参数中带-  去掉横岗，后边首字母大写
+data的值传递给组件 ： v-bind
+-->
 
 <body>
     <div id="app">
@@ -59,7 +63,7 @@ var MyComponent = Vue.component('my-component')
                 <div>lighting</div>
                  <h1>{{quanju}}</h1>
                 </div>`,
-            prop : ['quanju']
+            props : ['quanju']
         });
     new Vue({
         el: '#app',

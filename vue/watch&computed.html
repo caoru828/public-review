@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<!--
+computed vs watched
+computed ：（特点：定义新属性，需要缓存）计算属性用来计算的 计算属性会产生缓存，组件更新时候要是不会被改变的时候就不会重新计算
+计算属性放到vue实例中去。所有getter和setter的this上下文自动绑定Vue实例。计算属性结果会被缓存。
+除非依赖响应式属性变化才会重新计算
+computed ： {
+aPlus :{
+get:function(){
+ return this.a+1
+},
+set:function (v){
+  this.a= v - 1
+}
+}
+}
+
+watch ： 一个对象 ， 键是需要观察的表达式，值是对应的回调函数。
+特点：watch监控原有的值，当前属性发生变化就会进入当前这个方法里边
+a:function(newVal,oldVal){
+
+}
+
+-->
+<div id="app">
+    {{firstName}} + {{lastName}} = {{fullName}}
+
+</div>
+<script src="vue.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: ''
+        },
+        /* computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName
+            }
+        } */
+        watch: {
+            firstName: function (val) {
+                console.log(val);
+                this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+                this.fullName = this.firstName + ' ' + val
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

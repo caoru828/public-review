@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <input type="text" id="ipt">
+    <h1 id="h1"></h1>
+
+</div>
+<!-- <script src="vue.js"></script> -->
+
+<!--
+vue有兼容性问题，因为 Object.defineProperty() 是 es5语法，本身就不支持ie8
+
+简单模拟双向数据绑定
+双向数据绑定原理
+Object.defineProperty() 通过一个对象建立起数据的对应关系，监测那个数据就是vue实例化对象下边的.$data
+  第一个参数是对象，第二个参数是你要监测当前对象的哪一个
+属性，第三个也是对象里边有get和set值（对应方法），
+每次输入的时候，这个对象里的值就会被改变的时候（可以用keyup完成），Object.defineProperty()监控会属性，
+属性改变的时候相当于设置值，那就调用set（改变的时候，就给要显示的那个div赋值.innerHTML），获取的时候就调用get，通过这个
+obj对象，就可以吧input和要显示的那个div建立起对应关系       set里那个参数val就是input里的值，通过它设置值
+-->
+
+<!--
+虚拟dom：虚拟dom是在内存里边的，而真实dom是真实渲染到浏览器里边的，当数据被改变的时候，
+用当前的js模拟了当前的dom树这样的数据结构，存到内存里，当状态被改变的时候，
+会比较这两个东西那个被改变了，（通过diff算法来比较和改变数据，找当前这个状态和上一个·状态哪一个被改变
+，把改变的东西显示在真实的dom节点上），再把改变的东西显示在真实的dom上
+
+for 循环里边的key便于重建这个虚拟dom树，检索速度加快
+-->
+
+<!--总结：指令    怎么定义组件，组件间传值  双向数据绑定原理  虚拟dom树
+
+-->
+
+<script>
+    /* new Vue({
+        el: '#app',
+        data: {
+            msg: ''
+        }
+    }); */
+    var obj = {};
+
+    var oIpt = document.getElementById('ipt');
+    oIpt.onkeyup = function(){
+        obj.name = this.value;
+    };
+
+    Object.defineProperty(obj, 'name', {
+        get: function(){
+
+        },
+
+    }); set: function(val){
+        // console.log(val);
+        document.getElementById('h1').innerHTML = val;
+    }
+//    set(val){  //跟上边一样，es6写法
+//         console.log(val);
+//        document.getElementById('h1').innerHTML = val;
+//    }
+</script>
+</body>
+
+</html>

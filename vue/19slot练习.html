@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!--slot元素可以用一种特殊的特性name来进一步配置如何分发内容。多个插槽可以有不同的名字-->
+<body>
+    <div id="app">
+        <zujian1>
+            <!-- <slot name='username'></slot>  替换 下边这一行  通过 slot="username"查找 -->
+
+            <h1 slot="username">张三</h1>
+            <span slot="age">18</span>
+        </zujian1>
+
+        <zujian1>
+            <span slot="username">李四</span>
+        </zujian1>
+    </div>
+
+    <template id="temp">
+        <!--外边必须只能是一个div包着-->
+        <div>
+
+            <div>
+                名字：
+                <!--相当于占位符一样-->
+                <!-- 插槽slot：h1那个
+                 通过slot="username"把其所在那个h1插入到slot标签那个位置  ，slot相当于占位上
+                    把当前的slot标签换成slot对应名字的那个标签
+
+                 优点：可重用性
+                 -->
+                <slot name='username'></slot>
+            </div>
+            <div>
+                年龄：
+                <slot name='age'>我是默认值</slot>
+            </div>
+        </div>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            components: {
+                zujian1: {
+//             找到#temp的标签把里边的内容放进去
+                    template: '#temp'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -6,17 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
+<!--
+官网摘：
+
+用法：
+
+注册或获取全局组件。注册还会自动使用给定的id设置组件的名称
+
+// 注册组件，传入一个扩展过的构造器
+Vue.component('my-component', Vue.extend({ /* ... */ }))
+
+// 注册组件，传入一个选项对象 (自动调用 Vue.extend)
+Vue.component('my-component', { /* ... */ })
+
+// 获取注册的组件 (始终返回构造器)
+var MyComponent = Vue.component('my-component')
+-->
+
+
+
 <body>
     <div id="app">
-        <template v-if="isShow">
-            <h1 >hhhh</h1>
-            <h2 >hhhhh</h2>
-        </template>
+        <!--<template v-if="isShow">-->
+            <!--<h1 >hhhh</h1>-->
+            <!--<h2 >hhhhh</h2>-->
+        <!--</template>-->
+        <job></job>
+
     </div>
     
     <script src="vue.js"></script>
 
     <script>
+
+
+
+//        全局组件
+        Vue.component('job',{
+            template:'<h1>This is a global component.</h1>'
+        });
     new Vue({
         el: '#app',
         data: {

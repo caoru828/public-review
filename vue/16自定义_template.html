@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<!--
+官网摘：
+
+用法：
+
+注册或获取全局组件。注册还会自动使用给定的id设置组件的名称
+
+// 注册组件，传入一个扩展过的构造器
+Vue.component('my-component', Vue.extend({ /* ... */ }))
+
+// 注册组件，传入一个选项对象 (自动调用 Vue.extend)
+Vue.component('my-component', { /* ... */ })
+
+// 获取注册的组件 (始终返回构造器)
+var MyComponent = Vue.component('my-component')
+-->
+
+
+
+<body>
+    <div id="app">
+        <!--<template v-if="isShow">-->
+            <!--<h1 >hhhh</h1>-->
+            <!--<h2 >hhhhh</h2>-->
+        <!--</template>-->
+        <job></job>
+        <!--组件不认识大写，要想大写要用-  -->
+        <small-component></small-component>
+
+    </div>
+    <div id="app2">
+        <job :quanju="msg3"></job>
+        <!--自定义属性，属性名：属性值  属性放在全局或者局部组件里用，但需要prop传进来
+         再在调用组件中 把属性放进去-->
+        <my-component :aa="msg" :bb="msg2"></my-component>
+    </div>
+    
+    <script src="vue.js"></script>
+
+    <script>
+
+
+
+//        全局组件
+        Vue.component('job',{
+//            template:'<h1>This is a global component.</h1>'
+//        div外边只能包一个
+            template:`<div>
+                <h1>This is a global component.</h1>
+                <div>lighting</div>
+                 <h1>{{quanju}}</h1>
+                </div>`,
+            prop : ['quanju']
+        });
+    new Vue({
+        el: '#app',
+        data: {
+            isShow: false,
+            msg:'局部变量！',
+            msg3:'局部变量！'
+        },components:{
+//            局部组件
+            smallComponent:{
+                template:`<div>
+                        <div>这个局部组件！</div>
+                        <h1>enen</h1>
+                        <h2>{{msg}}</h2>
+                    </div>`
+            }
+        }
+
+    });
+    new Vue({
+        el:'#app2',
+        data:{
+            msg:'局部变量!!！',
+            msg2:'局部变量!!！22222'
+        },components:{
+            myComponent:{
+                template:`<h1>{{aa}}{{bb}}</h1>`,
+//                传参都是prop传参
+                props : ['aa','bb']
+            }
+        }
+    })
+    </script>
+</body>
+</html>

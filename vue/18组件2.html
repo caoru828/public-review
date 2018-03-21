@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-
+<!--父组件往子组件传值-->
 <body>
     <div id="app">
         <div @click="add">divAdd</div>
@@ -25,7 +25,7 @@
             template: `
                 <div>
                     <h1>这是父组件{{msg}}</h1>
-                    <fe femsg='这是子组件，web前端培训'></fe>
+                    <fe femsg='这是子组件，web前端'></fe>
                     <fe :femsg='msg'></fe>
                 </div>
             `,

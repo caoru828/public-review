@@ -43,8 +43,8 @@ data的值传递给组件 ： v-bind
     </div>
     <div id="app2">
         <job :quanju="msg3"></job>
-        <!--自定义属性，属性名：属性值  属性放在全局或者局部组件里用，但需要prop传进来
-         再在调用组件中 把属性放进去-->
+        <!--自定义属性，属性名：属性值  属性放在全局或者局部组件里用，但属性值需要prop传进来
+         再在调用组件中 把属性及属性值放进去-->
         <my-component :aa="msg" :bb="msg2"></my-component>
     </div>
     

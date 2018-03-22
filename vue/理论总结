@@ -65,4 +65,171 @@ for 循环里边的key便于重建这个虚拟dom树，检索速度加快
 
 
 vue-cli
+1.是什么？
+vue-cli是vue的脚手架（脚手架就是一个平台，通过这个平台把项目（房子）做好）
+而vue-cli是通过一些命令行，自动从服务器上下载一个模板下来，就是一个文件夹的结构，
+这些结构已经把webpack这些东西给配好了，”开箱即用”的构建工具配置
 
+2.热重载：没有开发代码，这边ctrl+s，那边界面直接刷新
+
+我们写的代码都在src下边
+assets资源文件
+component放组件
+router文件夹里边配置路由（设置访问路径，把路由和组件映射起来，单页面就路由之间的切换，就是组件之间的切换）
+main.js入口文件
+static静态资源
+
+3.
+路由配置过程
+ 1.定义组件，放在components里写个Test.vue这个文件
+ 2.引入组件，在router的index.js下引入这个组件 import Test from '@components/Test'
+ 3..配置路由：在router的index。js下的export default new Router（{
+       routes：[
+        {        //这么引入
+               path     :      '/test',
+               name   :       'Test',
+               component: Test
+       }
+      ]
+   }）
+
+
+4.参数传递
+1）
+1.router-link传参
+在app.vue里传参的时候（参数传给子组件的时候），
+router-link要写成变的，里边name是url地址，params传参数
+<router-link :to="{name:'test1',params:{ name:"lsi",age:88}}">
+ // 这个name属性是为了找到这个name=test1的组件，进行传参和跳转
+2.接收参数，在子组件里接受参数{{$route.params.name}},{{$router.params.age}}
+params必须是params不能改动
+
+传参的时候也可以用$route.name直接获取到那个地址的名字
+router的index.js配置路由的时候，传name。组件里接受的时候，用$route.name直接获取到那个地址的名字
+
+2）
+利用url传参数
+1.创建组件
+2.在url地址上传参数<router-link to="/testurl/6/zhansan"></router-link>
+这个第一个参数是地址，第二个参数是uerId，第三个参数是所传的参数userName
+3.配置路由//在router的index.js下配置路由，path:'testUrl/:userId/:userName'  //：后边是变的，随便起名字
+4.接收这个参数
+在组件里接收这个参数
+<h1>{{$router.params.userId}}/h1>
+<h1>{{$router.params.userName}}/h1>
+注*可以在index.js下的path里配置正则表达式，控制接收参数；
+如果router-link里传一个参数但是接受的时候接收到两个，不会显示
+
+3）
+重定向传参（如果原来地址带有参数，那么重定向的时候会跟这新重定向的地址把参数一起传过去）
+path:'home/:userId(\\d+)/:userName'
+redirect:'testUrl/:userId(\\d+)/:userName'
+点击的时候直接重定向到配置的重定向的组件上，url地址跟这改变
+1.配置router-link    router-link跳到home
+2.配置路由  path:'/home'  redirect :'/'
+
+与重定向区别的  别名alias（给起一个小名）  跳转abc想直接跳到test1里，给test起个小名叫abc
+别名，真正的路径是abc，但是组件跳到是test
+(index.js)
+path :'/test1',
+component:Test1,
+alias:'/abc'
+(app.vue)
+<router-link to="/abc">alias</router-link>
+
+5.
+redirect和alias区别
+redirect：url地址改变，url变成了真是的path路径，
+alias：url地址没变，情况有好，只是改变了router-link的内容
+
+6.
+路由钩子函数
+（操作一些东西之前或者之后发生了什么事儿，利用钩子函数）点击的某一个连接的时候，进入之前发生什么事儿，就会进入这个钩子里边去
+（to,from,next）to跳到哪去，from从哪开始跳，next（）控制跳转，经过判断之后，不想跳转的话可以不写next或者next（false）
+想跳转的话就next(true)
+
+to，from是对象，next是函数
+
+beforeEnter进入之前进入的钩子
+
+7.编程式导航
+
+vue-cli
+https://segmentfault.com/a/1190000012315822
+
+1.请详细说下你对vue生命周期的理解？
+  答：总共分为8个阶段创建前/后，载入前/后，更新前/后，销毁前/后。
+  创建前/后： 在beforeCreated阶段，vue实例的挂载元素$el和数据对象data都为undefined，还未初始化。
+  在created阶段，vue实例的数据对象data有了，$el还没有。
+  载入前/后：在beforeMount阶段，vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，
+  data.message还未替换。在mounted阶段，vue实例挂载完成，data.message成功渲染。
+  更新前/后：当data变化时，会触发beforeUpdate和updated方法。
+  销毁前/后：在执行destroy方法后，对data的改变不会再触发周期函数，
+  说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在
+
+2.说出你所使用过的vue指令
+  答：v-on（监听事件、@change、@click）、v-if（判断的）
+  v-show（显示/隐藏）、v-bind（绑定属性、:disabled、:src）
+
+3.请说下具体使用vue的理解？
+
+答：1、使用vue不必担心布局更改和类名重复导致的js重写，因为它是靠数据驱动双向绑定，底层是通过Object.defineProperty() 定义的数据 set、get 函数原理实现。
+2、组件化开发，让项目的可拓展性、移植性更好，代码重用性更高，就好像农民工建房子，拿起自己的工具包就可以开工。项目经理坐等收楼就好。
+3、单页应用的体验零距离接触安卓原生应用，局部组件更新界面，让用户体验更快速省时。
+4、js的代码无形的规范，团队合作开发代码可阅读性更高。
+
+4.你觉得哪些项目适合vue框架？
+答：
+1、数据信息量比较多的，反之类似企业网站就无需此框架了。
+2、手机web和app应用多端共用一套界面的项目，
+因为使用vue.cli+webpack后的前端目录，非常有利于项目的跨平台部署。
+
+5.怎么理解MVVM模式的这些框架？
+
+ 答：1、M就是Model模型层，存的一个数据对象。
+ 2、V就是View视图层，所有的html节点在这一层。
+ 3、VM就是ViewModel，它通过data属性连接Model模型层，通过el属性连接View视图层。
+
+6.PC端项目你会在哪些场景使用Vue框架？
+
+  答：上万级数据需要瀑布流更新和搜索的时候，因为数据庞大的时候，用原生的dom操作js和html都会有列表的html布局，迭代很困难。再一个dom节点的大面积添加会影响性能。
+  那么vue为什么解决这些问题呢？
+  第一：只需用v-for在view层一个地方遍历数据即可，无需复制一段html代码在js和html两个地方。
+  第二：vue通过Virtual Dom就是在js中模拟DOM对象树来优化DOM操作。
+
+7.你是怎么认识vuex的？
+
+  答：vuex可以理解为一种开发模式或框架。比如PHP有thinkphp，java有spring等。
+  通过状态（数据源）集中管理驱动组件的变化（好比spring的IOC容器对bean进行集中管理）。
+  应用级的状态集中放在store中； 改变状态的方式是提交mutations，这是个同步的事物；
+  异步逻辑应该封装在action中。
+
+8vuex有哪几种属性？特性都是什么？
+
+ 答：有五种，分别是 State、 Getter、Mutation 、Action、 Module
+
+  action开始行动
+  module状态
+
+ 2、vuex的State特性是？
+ 一、Vuex就是一个仓库，仓库里面放了很多对象。其中state就是数据源存放地，
+ 对应于与一般Vue对象里面的data
+ 二、state里面存放的数据是响应式的，Vue组件从store中读取数据，若是store中的数据发生改变，
+ 依赖这个数据的组件也会发生更新
+ 三、它通过mapState把全局的 state 和 getters 映射到当前组件的 computed 计算属性中
+
+ 3、vuex的Getter特性是？
+ 一、getters 可以对State进行计算操作，它就是Store的计算属性
+ 二、 虽然在组件内也可以做计算属性，但是getters 可以在多组件之间复用
+ 三、 如果一个状态只在一个组件内使用，是可以不用getters
+
+ 4、vuex的Mutation特性是？
+ 一、Action 类似于 mutation，不同在于：
+ 二、Action 提交的是 mutation，而不是直接变更状态。
+ 三、Action 可以包含任意异步操作
+
+ 5、Vue.js中ajax请求代码应该写在组件的methods中还是vuex的actions中？
+ 一、如果请求来的数据是不是要被其他组件公用，仅仅在请求的组件内使用，就不需要放入vuex 的state里。
+ 二、如果被其他地方复用，这个很大几率上是需要的，如果需要，请将请求放入action里，方便复用，
+ 并包装成promise返回，在调用处用async await处理返回的数据。
+ 如果不要复用这个请求，那么直接写在vue文件里很方便。

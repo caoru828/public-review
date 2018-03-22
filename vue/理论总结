@@ -1,0 +1,68 @@
+
+
+1、 父子组件传值
+https://www.cnblogs.com/LoveAndPeace/p/7273648.html
+父-->子： props['']
+子-->父： $emit 来遍历  事件，并返回 参数
+
+2、自定义组件
+ 1. 全局组件
+        Vue.component('job',{
+//            template:'<h1>This is a global component.</h1>'
+//        div外边只能包一个
+            template:`<div>
+                <h1>This is a global component.</h1>
+                <div>lighting</div>
+                 <h1>{{quanju}}</h1>
+                </div>`,
+            props : ['quanju']
+        });
+
+在html #app中 <job></job>
+
+2. new Vue({
+          el: '#app',
+          data: {
+              isShow: false,
+              msg:'局部变量！',
+              msg3:'局部变量！'
+          },components:{
+  //            局部组件
+              smallComponent:{
+                  template:`<div>
+                          <div>这个局部组件！</div>
+                          <h1>enen</h1>
+                          <h2>{{msg}}</h2>
+                      </div>`
+              }
+          }
+
+      });
+在html #app中   <small-component></small-component>
+
+
+3、双向数据绑定原理
+vue有兼容性问题，因为 Object.defineProperty() 是 es5语法，本身就不支持ie8
+
+简单模拟双向数据绑定
+
+Object.defineProperty() 通过一个对象建立起数据的对应关系，监测那个数据就是vue实例化对象下边的.$data
+  第一个参数是对象，第二个参数是你要监测当前对象的哪一个
+属性，第三个也是对象里边有get和set值（对应方法），
+每次输入的时候，这个对象里的值就会被改变的时候（可以用keyup完成），Object.defineProperty()监控会属性，
+属性改变的时候相当于设置值，那就调用set（改变的时候，就给要显示的那个div赋值.innerHTML），获取的时候就调用get，通过这个
+obj对象，就可以吧input和要显示的那个div建立起对应关系       set里那个参数val就是input里的值，通过它设置值
+-->
+
+<!--
+4、
+虚拟dom：虚拟dom是在内存里边的，而真实dom是真实渲染到浏览器里边的，当数据被改变的时候，
+用当前的js模拟了当前的dom树这样的数据结构，存到内存里，当状态被改变的时候，
+会比较这两个东西那个被改变了，（通过diff算法来比较和改变数据，找当前这个状态和上一个·状态哪一个被改变
+，把改变的东西显示在真实的dom节点上），再把改变的东西显示在真实的dom上
+
+for 循环里边的key便于重建这个虚拟dom树，检索速度加快
+
+
+vue-cli
+

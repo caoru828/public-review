@@ -1,0 +1,17 @@
+
+Event Loop
+（同步任务放在运行栈里，浏览器timer模块遇到settimeout会把它拿走，到时间放到任务队列中，
+运行栈空会去异步队列中找，有放在同步任务栈中，setTimeout执行完再去异步队列中找有没有，有就继续执行
+循环过程就是Event loop）
+
+
+settimeout setinterval异步任务*（挂起 ）js优先同步任务，同步任务响应完之后再执行异步任务
+
+每次事件循环的时候，会先执行宏任务队列中的任务，然后再执行微任务队列中的任务
+
+宏任务：script（全局任务）, setTimeout, setInterval, setImmediate, I/O, UI rendering.
+微任务：process.nextTick, Promise, Object.observer, MutationObserver.
+
+
+process.nextTick和Promise这种微任务，都添加的当前循环的微任务队列之中。
+所以会比当前循环中的所有宏任务要后执行，会比下个循环中的宏任务要先执行。

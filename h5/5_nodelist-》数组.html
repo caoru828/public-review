@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1" class="aa">div1
+    <div id="id">div3</div>
+    <input type="text" name="username">
+    <input type="text" name="username">
+    <input type="text" name="username">
+</div>
+
+<script>
+    var oId = document.getElementById("id");
+    var aUser =  document.getElementsByName("username");// nodeList
+    console.log(aUser);
+
+//    类数组-->数组
+
+//    法1 数组解构
+    let arr = [...aUser];
+//    console.log(arr)
+//    arr.push(oId);
+//    console.log(arr);
+
+//    法二 Array.from变成数组
+    let arr2 = Array.from(aUser);
+//    console.log(arr2);
+//    arr2.push(oId);
+//    console.log(arr2);
+
+//    法三 slice.call
+    let arr3 = [].slice.call(aUser);
+    console.log(arr3);
+        arr3.push(oId);
+        console.log(arr3);
+
+//        法四
+    let arr4 = Array.prototype.slice.call(aUser);
+    console.log(arr4);
+    arr4.push(oId);
+    console.log(arr4);
+
+
+</script>
+</body>
+</html>

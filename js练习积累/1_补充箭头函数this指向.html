@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    var obj = {
+        a:100,
+        foo:function(){
+            console.log(this); //obj
+        }
+    };
+    var obj2 = {
+        a:100,
+        foo: ()=>{
+            console.log(this); //window
+        }
+    }
+    obj.foo();
+    obj2.foo();
+</script>
+</body>
+</html>
